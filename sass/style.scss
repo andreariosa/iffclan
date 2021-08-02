@@ -813,7 +813,9 @@ $versus-height: 100px;
 $versus-width: 75%;
 
 .versus {
-  .box-action {
+  margin-bottom: 60px;
+
+  #box-action {
     position: relative;
     text-align: center;
     text-transform: uppercase;
@@ -840,7 +842,7 @@ $versus-width: 75%;
     }
   }
 
-  .box-list {
+  #box-list {
     width: $versus-width;
     margin: auto;
     margin-top: calc(-#{$versus-height} / 2);
@@ -941,5 +943,18 @@ $versus-width: 75%;
         }
       }
     }
+  }
+}
+
+// ----------------------------------------------------------------------------------------------------
+// Footer
+// ----------------------------------------------------------------------------------------------------
+.footer {
+  margin-bottom: 30px;
+
+  p {
+    text-align: center;
+    margin-top: $border-width-main;
+    margin-bottom: 0px;
   }
 }

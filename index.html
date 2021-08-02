@@ -185,13 +185,13 @@
     </section>
 
     <section class="versus">
-      <div class="box-action">
+      <div id="box-action">
         <div id="chronology">
           <i class="fas fa-gamepad"></i>
           <p>Versus</p>
         </div>
       </div>
-      <div class="box-list">
+      <div id="box-list">
         <div id="list">
 
 <!--
@@ -264,6 +264,10 @@
         </div>
       </div>
     </section>
+
+    <section class="footer">
+      <p>Work in progress, check the <i class="fab fa-github"></i> <a target="_blank" href="https://github.com/weping/iffclan">GitHub</a> repo by <b>Weping</b></p>
+    </section>
   </div>
 
   <script>
@@ -328,6 +332,7 @@
         windowObjectReference = window.open("http://discord.iffclan.com", "Discord", windowFeatures)
       }
 
+      var boxList = document.getElementById("box-list")
       var list = document.getElementById("list")
       var chronology = document.getElementById("chronology")
       var chronologyText = chronology.innerHTML
@@ -340,9 +345,11 @@
       }
       chronology.onclick = function() {
         if (window.getComputedStyle(list).display === "none") {
+          boxList.style.marginBottom = "0px"
           list.style.display = "block"
           chronology.scrollIntoView()
         } else {
+          boxList.style.marginBottom = ""
           list.style.display = "none"
         }
       }
