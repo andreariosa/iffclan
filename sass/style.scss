@@ -46,6 +46,20 @@ a {
   line-height: 1.2;
   text-align: center;
 
+  .text-shadow {
+    text-shadow:
+      1px 1px darken($color-dark-primary, 60%),
+      2px 2px darken($color-dark-primary, 62%),
+      3px 3px darken($color-dark-primary, 64%),
+      4px 4px darken($color-dark-primary, 66%),
+      5px 5px darken($color-dark-primary, 68%),
+      6px 6px darken($color-dark-primary, 70%);
+  }
+
+  .text-shadow::first-letter {
+    text-shadow: none;
+  }
+
   h1 {
     margin-top: 25px;
     margin-bottom: 0px;
