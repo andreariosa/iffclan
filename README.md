@@ -7,6 +7,7 @@ This is the official **IFFclan** website reachable at this domain https://iffcla
 - [x] [2010] **StarCraft II** website
 - [x] [2010] **Bone Crushers** website
 - [ ] [2012] **Hitbox** website + forum + social networks
+    - [ ] Release "LWTS"
     - [ ] Release 1.0
     - [ ] Release 2.0
     - [ ] Release 3.0
