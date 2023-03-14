@@ -39,30 +39,107 @@ a {
 }
 
 // ----------------------------------------------------------------------------------------------------
+// Slogan
+// ----------------------------------------------------------------------------------------------------
+#slogan {
+  font-family: $font-wrapper;
+  font-size: 170%;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-top: $border-width-main solid $color-light-secondary;
+  border-bottom: $border-width-main solid $color-light-secondary;
+  background: $color-light-secondary;
+
+  p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: $color-dark-secondary;
+  }
+}
+
+// ----------------------------------------------------------------------------------------------------
+// Stripe
+// ----------------------------------------------------------------------------------------------------
+$stripe-size: 125px;
+$stripe-duration: 2s;
+
+.stripe {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  &-inner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    color: rgba(rgb(255, 255, 255), 0);
+    background: repeating-linear-gradient(45deg,
+        $color-light-secondary 25%,
+        $color-light-secondary 50%,
+        $color-dark-secondary 50%,
+        $color-dark-secondary 75%);
+    background-size: #{$stripe-size} #{$stripe-size};
+    background-clip: text;
+    animation: stripeBackgroundPosition #{$stripe-duration} linear infinite;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + #{$stripe-size});
+    height: 100%;
+    background: repeating-linear-gradient(45deg,
+        $color-dark-secondary 25%,
+        $color-dark-secondary 50%,
+        $color-light-secondary 50%,
+        $color-light-secondary 75%);
+    background-size: #{$stripe-size} #{$stripe-size};
+    animation: stripeTransform #{$stripe-duration} linear infinite;
+  }
+}
+
+@keyframes stripeTransform {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(#{$stripe-size} * -1));
+  }
+}
+
+@keyframes stripeBackgroundPosition {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: calc(#{$stripe-size} * -1) 0;
+  }
+}
+
+// ----------------------------------------------------------------------------------------------------
 // Header
 // ----------------------------------------------------------------------------------------------------
 #header {
-  font-size: 200%;
-  line-height: 1.2;
+  font-size: 300%;
   text-align: center;
-
-  .text-shadow {
-    text-shadow:
-      1px 1px darken($color-dark-primary, 60%),
-      2px 2px darken($color-dark-primary, 62%),
-      3px 3px darken($color-dark-primary, 64%),
-      4px 4px darken($color-dark-primary, 66%),
-      5px 5px darken($color-dark-primary, 68%),
-      6px 6px darken($color-dark-primary, 70%);
-  }
-
-  .text-shadow::first-letter {
-    text-shadow: none;
-  }
 
   h1 {
     margin-top: 25px;
-    margin-bottom: 0px;
+    margin-bottom: 25px;
     font-family: $font-header;
   }
 
@@ -168,18 +245,18 @@ a {
 .skewed {
   .split {
     top: 50%;
-    transform: rotate(30deg) translateY(-50%);
+    transform: rotate(45deg) translateY(-50%);
     height: 200%;
     transform-origin: top;
   }
 
   .left {
-    transform: skew(-30deg);
+    transform: skew(-45deg);
     margin-left: -1000px;
     width: calc(50vw + 1000px);
 
     .content-wrap {
-      transform: skew(30deg);
+      transform: skew(45deg);
       margin-left: 1000px;
     }
   }
