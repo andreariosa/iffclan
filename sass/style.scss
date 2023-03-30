@@ -922,22 +922,23 @@ $history-marker-width: 30px;
 }
 
 // ----------------------------------------------------------------------------------------------------
-// Versus
+// Events
 // ----------------------------------------------------------------------------------------------------
-$versus-height: 100px;
-$versus-width: 75%;
+$events-height: 100px;
+$events-width: 75%;
 
-.versus {
-  margin-bottom: 60px;
+.events {
+  margin-bottom: 30px;
 
   #box-action {
     position: relative;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-    height: $versus-height;
+    height: $events-height;
     width: calc(25vw + #{$border-width-main} * 2);
-    margin: auto;
+    margin-left: 5px;
+    margin-right: 5px;
 
     #chronology {
       @extend %container-dark;
@@ -958,9 +959,11 @@ $versus-width: 75%;
   }
 
   #box-list {
-    width: $versus-width;
-    margin: auto;
-    margin-top: calc(-#{$versus-height} / 2);
+    width: $events-width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc(-#{$events-height} / 2);
+    margin-bottom: 30px;
 
     #list {
       @extend %container-dark;
@@ -1012,13 +1015,17 @@ $versus-width: 75%;
         margin-bottom: 4px;
       }
     }
+
+    #list:nth-child(1) {
+      display: block;
+    }
   }
 }
 
 // --------------------------------------------------
 
 @media(max-width: 835px) {
-  .versus {
+  .events {
     .box-action {
       width: calc(50vw + #{$border-width-main} * 2);
     }

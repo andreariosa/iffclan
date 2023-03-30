@@ -195,7 +195,7 @@
             <div class="marker"></div>
             <div class="text">
               <h1>Titanfall</h1>
-              <p>Our biggest side-project about a video game. The official Italian community of Titanfall...</p>
+              <p>Our biggest side-project about a video game. The first Italian community of Titanfall officially recognized by Respawn Entertainment.</p>
             </div>
           </li>
           <li class="item">
@@ -222,14 +222,34 @@
       </div>
     </section>
 
-    <section class="versus">
-      <div id="box-action">
-        <div id="chronology">
-          <i class="fas fa-gamepad"></i>
-          <p>Versus</p>
+    <section class="events">
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <div id="box-action">
+          <div id="chronology">
+            <i class="fas fa-users"></i>
+            <p>LAN Party</p>
+          </div>
+        </div>
+        <div id="box-action">
+          <div id="chronology">
+            <i class="fas fa-trophy"></i>
+            <p>Tournaments</p>
+          </div>
+        </div>
+        <div id="box-action">
+          <div id="chronology">
+            <i class="fas fa-gamepad"></i>
+            <p>Versus</p>
+          </div>
         </div>
       </div>
       <div id="box-list">
+        <div id="list">
+          <div class="item"><p>1</p></div>
+        </div>
+        <div id="list">
+          <div class="item"><p>2</p></div>
+        </div>
         <div id="list">
 
 <!--
@@ -310,6 +330,7 @@
 
   <script>
     function core() {
+      /*Banner*/
       var eventDate = new Date("2021-10-22").getTime()
 
       var banner = document.getElementById("banner")
@@ -355,8 +376,10 @@
         }
       }
 
+      /*Discord*/
       var discord = document.getElementById("discord")
       var discordText = discord.innerHTML
+
       discord.style.cursor = "pointer"
       discord.onmouseover = function() {
         discord.innerHTML = "discord.iffclan.com"
@@ -370,27 +393,37 @@
         windowObjectReference = window.open("http://discord.iffclan.com", "Discord", windowFeatures)
       }
 
+      /*Events*/
+      var chronology = document.querySelectorAll('[id=chronology]')
       var boxList = document.getElementById("box-list")
-      var list = document.getElementById("list")
-      var chronology = document.getElementById("chronology")
-      var chronologyText = chronology.innerHTML
-      chronology.style.cursor = "pointer"
-      chronology.onmouseover = function() {
-        chronology.innerHTML = "<i class=\"fas fa-trophy\"></i><p>Awards</p>"
-      }
-      chronology.onmouseout = function() {
-        chronology.innerHTML = chronologyText
-      }
-      chronology.onclick = function() {
-        if (window.getComputedStyle(list).display === "none") {
-          boxList.style.marginBottom = "0px"
-          list.style.display = "block"
-          chronology.scrollIntoView()
-        } else {
-          boxList.style.marginBottom = ""
-          list.style.display = "none"
+      var list = document.querySelectorAll('[id=list]')
+
+      var boxListMB = window.getComputedStyle(boxList, null).getPropertyValue("margin-bottom");
+
+      function listStatus(i) {
+        for(var j = 0; j < list.length; j++) {
+          if(i != j) {
+            list[j].style.display = "none"
+          } else {
+            if (window.getComputedStyle(list[i]).display === "none") {
+              boxList.style.marginBottom = "0px"
+              list[i].style.display = "block"
+            } else {
+              boxList.style.marginBottom = (parseInt(boxListMB)*2).toString()+"px"
+              list[i].style.display = "none"
+            }
+            chronology[i].scrollIntoView()
+          }
         }
       }
+
+      for(var i = 0; i < chronology.length; i++) {
+        chronology[i].style.cursor = "pointer"
+      }
+
+      chronology[0].onclick = function() {listStatus(0)}
+      chronology[1].onclick = function() {listStatus(1)}
+      chronology[2].onclick = function() {listStatus(2)}
     }
   </script>
 </body>
