@@ -952,6 +952,25 @@ $events-width: 75%;
 .events {
   margin-bottom: 30px;
 
+  .info {
+    text-align: center;
+    width: $events-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: calc(#{$border-width-main} * 9);
+    padding-bottom: calc(#{$border-width-main} * 9);
+
+    h1 {
+      margin-top: 0px;
+      margin-bottom: calc(#{$border-width-main} * 3);
+    }
+
+    p {
+      margin-top: $border-width-main;
+      margin-bottom: 0px;
+    }
+  }
+
   .buttons {
     display: flex;
     align-items: center;
@@ -1016,8 +1035,16 @@ $events-width: 75%;
         background-color: $color-light-tertiary;
       }
 
+      .intro {
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
       .desc {
         margin-left: 5px;
+        margin-right: 5px;
         margin-top: 16px;
       }
 
@@ -1144,7 +1171,7 @@ $events-width: 75%;
         }
 
         .versus {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: 45px 45px 1fr;
 
           i:nth-child(4) {
             grid-column: span 0;
