@@ -911,7 +911,7 @@ $history-marker-width: 30px;
           grid-template-columns: auto calc(100% - #{$history-marker-width} / 2);
 
           .date {
-            padding-top: calc(#{$border-width-main} + 2);
+            padding-top: calc(#{$border-width-main} + 2px);
             padding-right: calc(#{$border-width-main} * 3);
             padding-left: calc(#{$border-width-main} * 3);
             padding-bottom: calc(#{$border-width-main} * 2);
@@ -1128,13 +1128,13 @@ $events-width: 75%;
           }
 
           p:nth-child(3) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           p:nth-child(4) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
@@ -1146,25 +1146,25 @@ $events-width: 75%;
           }
 
           p:nth-child(3) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           i:nth-child(4) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           p:nth-child(5) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           p:nth-child(6) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
@@ -1174,19 +1174,19 @@ $events-width: 75%;
           grid-template-columns: 45px 45px 1fr;
 
           i:nth-child(4) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           p:nth-child(5) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
 
           p:nth-child(6) {
-            grid-column: span 0;
+            grid-column: unset;
             display: none;
             width: 0px;
           }
