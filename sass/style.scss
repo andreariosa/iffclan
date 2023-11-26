@@ -1072,7 +1072,7 @@ $events-width: 75%;
 
       .versus {
         display: grid;
-        grid-template-columns: repeat(3, 1fr) 45px repeat(2, 1fr);
+        grid-template-columns: repeat(2, 65px) 1fr 45px repeat(2, 1fr);
 
         p:nth-child(1) {
           text-align: right;
