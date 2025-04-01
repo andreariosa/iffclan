@@ -19,9 +19,9 @@ We have recovered and synthesized all **legacy content** since 2008:
 - [x] [2014] **Overwatched** :heavy_check_mark: Website :heavy_check_mark: Social networks
 
 **TODO** list:
-- [ ] Improve **IFFclan** website SEO
-- [ ] Dump and merge all users info from old DBs and create a new collection for **Hitbox** website
-- [ ] Clean up and update all social network pages for both **IFFclan** and **Hitbox**
+- [ ] Improve **IFFclan** website SEO.
+- [ ] Dump and merge all users info from old DBs and create a new collection for **Hitbox** website.
+- [ ] Clean up and update all social network pages for both **IFFclan** and **Hitbox**.
 
 # To compile all the CSS files just run
 - `npm start`
