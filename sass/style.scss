@@ -137,6 +137,8 @@ $header-container-grid-item-size: 50px;
 // ----------------------------------------------------------------------------------------------------
 // Wrapper
 // ----------------------------------------------------------------------------------------------------
+$wrapper-height: 15vw;
+
 @mixin wrapper-background-gradient-light($img: url) {
   background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)), $img no-repeat 8vw bottom;
 }
@@ -147,7 +149,7 @@ $header-container-grid-item-size: 50px;
 #wrapper {
   position: relative;
   width: 100%;
-  min-height: 20vw;
+  min-height: $wrapper-height;
   overflow: hidden;
   font-size: 170%;
   font-family: $font-wrapper;
@@ -168,13 +170,13 @@ $header-container-grid-item-size: 50px;
 .layer {
   position: absolute;
   width: 100vw;
-  min-height: 20vw;
+  min-height: $wrapper-height;
   overflow: hidden;
 
   .content-wrap {
     position: absolute;
     width: 100vw;
-    min-height: 20vw;
+    min-height: $wrapper-height;
   }
 
   .content-body {
@@ -195,7 +197,7 @@ $header-container-grid-item-size: 50px;
   z-index: 1;
 
   .content-body {
-    right: -26%;
+    right: -25%;
     @include wrapper-background-gradient-dark($img: url(../images/bg-right.jpg));
   }
 }
@@ -206,7 +208,7 @@ $header-container-grid-item-size: 50px;
   z-index: 2;
 
   .content-body {
-    left: -26%;
+    left: -25%;
     @include wrapper-background-gradient-light($img: url(../images/bg-left.jpg));
   }
 }
@@ -278,13 +280,25 @@ $header-container-grid-item-size: 50px;
   }
 }
 
-@media(min-width: 2745px) {
-  #wrapper p {
-    margin-bottom: 5px;
+@media(min-width: 2561px) {
+  $wrapper-height: 7vw;
+
+  #wrapper {
+    min-height: $wrapper-height;
+  }
+
+  .layer {
+    min-height: $wrapper-height;
+
+    .content-wrap {
+      min-height: $wrapper-height;
+    }
   }
 
   .right .content-body, .left .content-body {
     background: none;
+    background-image: linear-gradient(to right, rgba($color-light-secondary, 0.1) 1px, transparent 0px), linear-gradient(to bottom, rgba($color-light-secondary, 0.1) 1px, transparent 0px);
+    background-size: 27px 27px;
   }
 }
 
