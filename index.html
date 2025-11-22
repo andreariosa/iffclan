@@ -14,10 +14,10 @@
     <p>Old style multigaming, since 2008</p>
   </div>
 
-  <div class="stripe">
-    <div class="stripe-inner">
+  <div class="header-base">
+    <div class="header-container">
       <div id="header">
-        <h1>&#128997; IFFclan</h1>
+        <h1>IFFclan</h1>
       </div>
     </div>
   </div>
@@ -420,155 +420,6 @@
     </div>
   </div>
 
-  <script>
-    function core() {
-      /*Wrapper*/
-      var wrapper = document.getElementById("wrapper")
-      var wrapperRect = wrapper.getBoundingClientRect()
-
-      window.addEventListener('resize', function(event) {
-        wrapperRect = wrapper.getBoundingClientRect()
-      }, true)
-
-      wrapper.style.cursor = "pointer"
-      wrapper.onclick = function(event) {
-        var windowObjectReference
-        var windowFeatures = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes"
-
-        if(event.clientX < (wrapperRect.width / 2)) {
-          windowObjectReference = window.open("https://hitbox.it", "Hitbox", windowFeatures)
-        } else {
-          windowObjectReference = window.open("https://hitbox.it/summer-edition-2018", "Event", windowFeatures)
-        }
-      }
-
-      /*Banner*/
-      var eventDate = new Date("2025-04-12").getTime()
-      var eventClickable = false
-
-      var banner = document.getElementById("banner")
-      var bannerTime = document.getElementById("call-to-action")
-      var bannerInfo = document.getElementById("event-info")
-      var bannerBottomBorderWidth = getComputedStyle(bannerTime, null).getPropertyValue('border-bottom-width')
-
-      var timerTick = setInterval(function tick() {
-        var now = new Date().getTime()
-        var distance = eventDate - now
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000)
-
-        // Output the result
-        document.getElementById("call-to-action").innerHTML =
-        "<h1>Next event in " + days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s " + "</h1>"
-
-        // If the count down is over
-        if (distance < 0) {
-          clearInterval(timerTick)
-          banner.style.display = "none"
-        }
-
-        return tick
-      }(), 1000)
-
-      function showInfo() {
-        banner.style.gridTemplateRows = "60px 40px"
-        bannerTime.style.borderStyle = "none solid none solid"
-        bannerTime.style.paddingBottom = bannerBottomBorderWidth
-        bannerInfo.style.display = "block"
-      }
-
-      function hideInfo() {
-        banner.style.gridTemplateRows = "60px 0px"
-        bannerTime.style.borderStyle = "none solid solid solid"
-        bannerTime.style.paddingBottom = "0px"
-        bannerInfo.style.display = "none"
-      }
-
-      if (eventClickable) {
-        bannerTime.style.cursor = "pointer"
-        bannerTime.onclick = function() {
-          if (window.getComputedStyle(bannerInfo).display === "none") {
-            showInfo()
-          } else {
-            hideInfo()
-          }
-        }
-      } else {
-        showInfo()
-      }
-
-      /*Discord*/
-      var discord = document.getElementById("discord")
-      var discordText = discord.innerHTML
-
-      discord.style.cursor = "pointer"
-      discord.onmouseover = function() {
-        discord.innerHTML = "discord.iffclan.com"
-      }
-      discord.onmouseout = function() {
-        discord.innerHTML = discordText
-      }
-      discord.onclick = function() {
-        var windowObjectReference
-        var windowFeatures = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes"
-        windowObjectReference = window.open("http://discord.iffclan.com", "Discord", windowFeatures)
-      }
-
-      /*Events*/
-      var chronology = document.querySelectorAll('[class=chronology]')
-      var boxList = document.getElementById("box-list")
-      var list = document.querySelectorAll('[class=list]')
-
-      var boxListMB = window.getComputedStyle(boxList, null).getPropertyValue("margin-bottom")
-
-      function listStatus(i) {
-        for(var j = 0; j < list.length; j++) {
-          if(i != j) {
-            list[j].style.display = "none"
-          } else {
-            if (window.getComputedStyle(list[i]).display === "none") {
-              boxList.style.marginBottom = "0px"
-              list[i].style.display = "block"
-            } else {
-              boxList.style.marginBottom = (parseInt(boxListMB) * 2).toString()+"px"
-              list[i].style.display = "none"
-            }
-            chronology[i].scrollIntoView()
-          }
-        }
-      }
-
-      for(var i = 0; i < chronology.length; i++) {
-        chronology[i].style.cursor = "pointer"
-      }
-
-      chronology[0].onclick = function() {listStatus(0)}
-      chronology[1].onclick = function() {listStatus(1)}
-      chronology[2].onclick = function() {listStatus(2)}
-
-      /*Times*/
-      var times = document.querySelectorAll('[class=time]')
-
-      times.forEach(time => {
-        var date = new Date(time.innerHTML)
-        var options = { year: 'numeric', month: 'long', day: 'numeric' }
-        var newTime = date.toLocaleDateString("en-UK", options)
-        time.innerHTML = newTime
-
-        time.onmouseover = function() {
-          newTime = date.toLocaleDateString("it-IT", options)
-          time.innerHTML = newTime
-        }
-        time.onmouseout = function() {
-          newTime = date.toLocaleDateString("en-UK", options)
-          time.innerHTML = newTime
-        }
-      })
-    }
-  </script>
+  <script src="js/core.js"></script> 
 </body>
 </html>

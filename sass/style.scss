@@ -51,8 +51,7 @@ h1 {
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
-  border-top: $border-width-main solid $color-light-secondary;
-  border-bottom: $border-width-main solid $color-light-secondary;
+  border-block: $border-width-main solid $color-light-secondary;
   background: $color-light-secondary;
 
   p {
@@ -71,12 +70,13 @@ h1 {
 }
 
 // ----------------------------------------------------------------------------------------------------
-// Stripe
+// Header
 // ----------------------------------------------------------------------------------------------------
-$stripe-size: 100px;
-$stripe-duration: 2s;
+$header-container-grid-columns: 1;
+$header-container-grid-rows: 3;
+$header-container-grid-item-size: 50px;
 
-.stripe {
+.header-base {
   overflow: hidden;
   position: relative;
   display: flex;
@@ -84,96 +84,45 @@ $stripe-duration: 2s;
   align-items: center;
   width: 100%;
   height: 100%;
-
-  &-inner {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: rgba(rgb(255, 255, 255), 0);
-    background: repeating-linear-gradient(45deg,
-        $color-light-secondary 25%,
-        $color-light-secondary 50%,
-        $color-dark-secondary 50%,
-        $color-dark-secondary 75%);
-    background-size: #{$stripe-size} #{$stripe-size};
-    -webkit-background-clip: text;
-            background-clip: text;
-    -webkit-animation: stripeBackgroundPosition #{$stripe-duration} linear infinite;
-            animation: stripeBackgroundPosition #{$stripe-duration} linear infinite;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% + #{$stripe-size});
-    height: 100%;
-    background: repeating-linear-gradient(45deg,
-        $color-dark-secondary 25%,
-        $color-dark-secondary 50%,
-        $color-light-secondary 50%,
-        $color-light-secondary 75%);
-    background-size: #{$stripe-size} #{$stripe-size};
-    -webkit-animation: stripeTransform #{$stripe-duration} linear infinite;
-            animation: stripeTransform #{$stripe-duration} linear infinite;
-  }
 }
 
-@-webkit-keyframes stripeTransform {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(#{$stripe-size} * -1));
-  }
-}
-@keyframes stripeTransform {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(#{$stripe-size} * -1));
-  }
+.header-container {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  grid-template-columns: repeat(#{$header-container-grid-columns}, #{$header-container-grid-item-size});
+  grid-template-rows: repeat(#{$header-container-grid-rows}, #{$header-container-grid-item-size});
+  gap: 5px;
 }
 
-@-webkit-keyframes stripeBackgroundPosition {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: calc(#{$stripe-size} * -1) 0;
-  }
-}
-@keyframes stripeBackgroundPosition {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: calc(#{$stripe-size} * -1) 0;
-  }
+.header-container-item {
+  width: $header-container-grid-item-size;
+  height: $header-container-grid-item-size;
+  background-color: $color-light-secondary;
+  position: absolute;
+  transition: transform 0.5s ease;
 }
 
-// ----------------------------------------------------------------------------------------------------
-// Header
-// ----------------------------------------------------------------------------------------------------
 #header {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
   font-size: 170%;
   text-align: center;
 
   h1 {
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-size: 2em;
     font-family: $font-header;
+    color: $color-light-primary;
   }
 }
 
