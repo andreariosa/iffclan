@@ -512,7 +512,7 @@ $roster-bg-monkas:      "../images/iff-stevatero.jpg";
       overflow: hidden;
 
       &:hover {
-        flex-grow: 2;
+        flex-grow: 1.2;
       }
       &:after {
         content: "";
@@ -630,6 +630,31 @@ $roster-bg-monkas:      "../images/iff-stevatero.jpg";
       .box{
         &:after {
           font-size: 120%;
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 2561px) {
+  .roster {
+    .people {
+      .box {
+        &:hover {
+          flex-grow: 1.1;
+        }
+        &:after {
+          bottom: -30%;
+          transform: rotate(-5deg);
+        }
+        &.pogchamp {
+          background-position: 100% 0px;
+        }
+        &.gachigasm {
+          background-position: 100% 0px;
+        }
+        &.monkas {
+          background-position: 100% 0px;
         }
       }
     }
