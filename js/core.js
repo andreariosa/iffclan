@@ -1,74 +1,84 @@
 function core() {
-  /***************Header***************/
+  /* Header */
   const gridContainer = document.querySelector(".header-container");
   const gridHeaderContainer = document.getElementById("header");
   const gridTitleContainer = gridHeaderContainer
     ? gridHeaderContainer.querySelector("h1")
     : null;
 
-  // Generate the grid items
+  // Generate grid items
   function buildGrid() {
     // Remove previous items
     document
       .querySelectorAll(".header-container-item")
       .forEach((n) => n.remove());
 
-    // Calculate columns/rows from container size (cell = 50px + 5px gap = 55px)
+    // Calculate number of columns and rows from container size (cell = 50px + 5px gap = 55px)
     const cellSize = 55;
 
     const rect = gridContainer.getBoundingClientRect();
     let squaresColumns = Math.max(1, Math.ceil(rect.width / cellSize));
     let squaresRows = Math.max(1, Math.ceil(rect.height / cellSize));
 
-    const rectTitle = gridTitleContainer.getBoundingClientRect();
-    let squaresColumnsTitle =
-      Math.max(1, Math.ceil(rectTitle.width / cellSize)) + 1;
-    let squaresRowsTitle =
-      Math.max(1, Math.ceil(rectTitle.height / cellSize)) - 1;
-
-    // Generate the grid items
-    for (let i = 0; i < squaresColumns * squaresRows; i++) {
-      // Skip items that overlap the title
-      if (
-        i / squaresColumns >=
-          Math.floor((squaresRows - squaresRowsTitle) / 2) &&
-        i / squaresColumns < Math.floor((squaresRows + squaresRowsTitle) / 2) &&
-        i % squaresColumns >=
-          Math.floor((squaresColumns - squaresColumnsTitle) / 2) &&
-        i % squaresColumns <
-          Math.floor((squaresColumns + squaresColumnsTitle) / 2)
-      ) {
-        continue;
-      }
-
-      // Skip items that overlap the title
-      if (
-        i / squaresColumns >=
-          Math.floor((squaresRows - squaresRowsTitle) / 2) &&
-        i / squaresColumns < Math.floor((squaresRows + squaresRowsTitle) / 2) &&
-        i % squaresColumns >=
-          Math.floor((squaresColumns - squaresColumnsTitle) / 2) &&
-        i % squaresColumns <
-          Math.floor((squaresColumns + squaresColumnsTitle) / 2)
-      ) {
-        continue;
-      }
-
-      // 30% chance to keep a tile
-      const keepProbability = 0.3;
-      if (Math.random() < keepProbability) {
-        continue;
-      }
-
-      const div = document.createElement("div");
-      div.classList.add("header-container-item");
-      // Set position in the grid
-      div.style.left = `${(i % squaresColumns) * cellSize}px`;
-      div.style.top = `${Math.floor(i / squaresColumns) * cellSize}px`;
-      gridContainer.appendChild(div);
+    // Get title rectangle if present
+    let rectTitle = { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0 };
+    if (gridTitleContainer) {
+      rectTitle = gridTitleContainer.getBoundingClientRect();
     }
 
-    // Move the header element to the end of the container so it paints above the grid items
+    // Convert title rect to grid-relative coordinates
+    const titleRel = {
+      left: rectTitle.left - rect.left,
+      top: rectTitle.top - rect.top,
+      right: rectTitle.right - rect.left,
+      bottom: rectTitle.bottom - rect.top,
+    };
+
+    // Clamp the title rect to the grid bounds
+    titleRel.left = Math.max(0, Math.min(rect.width, titleRel.left));
+    titleRel.top = Math.max(0, Math.min(rect.height, titleRel.top));
+    titleRel.right = Math.max(0, Math.min(rect.width, titleRel.right));
+    titleRel.bottom = Math.max(0, Math.min(rect.height, titleRel.bottom));
+
+    // Align title to the cell grid (round top to the next cell boundary and set height to one cell)
+    if (typeof cellSize === 'number' && cellSize > 0) {
+      titleRel.top = Math.min(rect.height, Math.ceil(titleRel.top / cellSize) * cellSize);
+      titleRel.bottom = Math.min(rect.height, titleRel.top + cellSize);
+    }
+
+    // Generate grid items
+    for (let i = 0; i < squaresColumns * squaresRows; i++) {
+      const currentRow = Math.floor(i / squaresColumns);
+      const currentCol = i % squaresColumns;
+
+      const cellLeft = currentCol * cellSize;
+      const cellTop = currentRow * cellSize;
+      const cellRight = cellLeft + cellSize;
+      const cellBottom = cellTop + cellSize;
+
+      // Skip cells that overlap the title area
+      const titleHasSize = titleRel && titleRel.right > titleRel.left && titleRel.bottom > titleRel.top;
+      if (titleHasSize) {
+        const noOverlap =
+          cellRight <= titleRel.left ||
+          cellLeft >= titleRel.right ||
+          cellBottom <= titleRel.top ||
+          cellTop >= titleRel.bottom;
+
+        if (!noOverlap) continue;
+      }
+
+      // Render a tile with 70% probability
+      if (Math.random() < 0.7) {
+        const div = document.createElement("div");
+        div.classList.add("header-container-item");
+        div.style.left = `${currentCol * cellSize}px`;
+        div.style.top = `${currentRow * cellSize}px`;
+        gridContainer.appendChild(div);
+      }
+    }
+
+    // Render the header above grid items
     const gridHeaderContainer = document.getElementById("header");
     if (gridHeaderContainer) {
       gridContainer.appendChild(gridHeaderContainer);
@@ -78,14 +88,19 @@ function core() {
   // Initial build
   buildGrid();
 
-  // Rebuild on resize so grid matches new resolution/container size
+  let isMouseOverGrid = false;
+  gridContainer.addEventListener("mouseenter", () => isMouseOverGrid = true);
+  gridContainer.addEventListener("mouseleave", () => isMouseOverGrid = false);
+  setInterval(() => !isMouseOverGrid && buildGrid(), 1500);
+
+  // Rebuild on resize so the grid matches the new container size
   let resizeTimeout;
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(buildGrid, 150);
   });
 
-  // Function to apply gravity-like effect
+  // Apply a gravity-like effect to an item
   function applyGravity(item) {
     let posY = parseFloat(item.style.top); // Current top position
     let velocityY = 0; // Initial falling speed
@@ -102,7 +117,7 @@ function core() {
       item.style.left = `${parseFloat(item.style.left) + xDirection}px`;
       item.style.transform = `rotate(${rotation}deg)`;
 
-      // Stop the animation if the square moves outside the screen
+      // Stop the animation once the square moves outside the screen
       if (posY < window.innerHeight) {
         requestAnimationFrame(fall);
       } else {
@@ -114,7 +129,7 @@ function core() {
     requestAnimationFrame(fall);
   }
 
-  // Event listener for mousemove over the grid container
+  // Add mousemove listener to the grid container
   gridContainer.addEventListener("mousemove", (event) => {
     const items = document.querySelectorAll(".header-container-item");
 
@@ -131,7 +146,7 @@ function core() {
     });
   });
 
-  /***************Wrapper***************/
+  /* Wrapper */
   var wrapper = document.getElementById("wrapper");
   var wrapperRect = wrapper.getBoundingClientRect();
 
@@ -164,7 +179,7 @@ function core() {
     }
   };
 
-  /***************Banner***************/
+  /* Banner */
   var eventDate = new Date("2025-04-12").getTime();
   var eventClickable = false;
 
@@ -188,7 +203,7 @@ function core() {
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Output the result
+      // Update the call-to-action text with the remaining time
       document.getElementById("call-to-action").innerHTML =
         "<h1>Next event in " +
         days +
@@ -201,7 +216,7 @@ function core() {
         "s " +
         "</h1>";
 
-      // If the count down is over
+      // If the countdown is over
       if (distance < 0) {
         clearInterval(timerTick);
         banner.style.display = "none";
@@ -239,7 +254,7 @@ function core() {
     showInfo();
   }
 
-  /***************Discord***************/
+  /* Discord */
   var discord = document.getElementById("discord");
   var discordText = discord.innerHTML;
 
@@ -261,7 +276,7 @@ function core() {
     );
   };
 
-  /***************Events***************/
+  /* Events */
   var chronology = document.querySelectorAll("[class=chronology]");
   var boxList = document.getElementById("box-list");
   var list = document.querySelectorAll("[class=list]");
@@ -302,7 +317,7 @@ function core() {
     listStatus(2);
   };
 
-  /***************Times***************/
+  /* Times */
   var times = document.querySelectorAll("[class=time]");
 
   times.forEach((time) => {

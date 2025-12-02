@@ -1,11 +1,12 @@
 // ----------------------------------------------------------------------------------------------------
 // Global
 // ----------------------------------------------------------------------------------------------------
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Secular+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700&display=swap');
 
 $font-main: Arial, Helvetica, sans-serif;
-$font-header: 'Secular One', sans-serif;
 $font-wrapper: 'Bebas Neue', cursive;
+$font-header: 'Orbitron', sans-serif;
+$font-header-weight: 700;
 
 $border-width-main: 4px;
 
@@ -114,14 +115,13 @@ $header-container-grid-item-size: 50px;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  font-size: 170%;
+  font-size: 165%;
   text-align: center;
 
   h1 {
-    margin-top: 25px;
-    margin-bottom: 20px;
     font-size: 2em;
     font-family: $font-header;
+    font-weight: $font-header-weight;
     color: $color-light-primary;
   }
 }
