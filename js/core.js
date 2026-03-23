@@ -180,7 +180,7 @@ function core() {
   };
 
   /* Banner */
-  var eventDate = new Date("2025-04-12").getTime();
+  var eventDate = new Date("2026-03-28").getTime();
   var eventClickable = false;
 
   var banner = document.getElementById("banner");
