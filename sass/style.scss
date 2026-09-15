@@ -1016,6 +1016,12 @@ $events-width: 75%;
         i {
           margin-top: 5px;
           margin-left: 5px;
+          width: auto;
+          text-align: left;
+        }
+
+        .footnote {
+          font-family: $font-main;
         }
       }
 
