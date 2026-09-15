@@ -39,7 +39,7 @@ a {
   text-decoration: none;
 }
 
-h1 {
+h1, h2, h3 {
   font-size: 150%;
 }
 
@@ -156,7 +156,7 @@ $wrapper-height: 15vw;
   border-top: $border-width-main solid $color-light-secondary;
   border-bottom: $border-width-main solid $color-light-secondary;
 
-  h1 {
+  h2 {
     margin-top: 0px;
     margin-bottom: 155px;
   }
@@ -187,7 +187,7 @@ $wrapper-height: 15vw;
     transform: translateY(-50%);
   }
 
-  h1 {
+  h2 {
     font-size: 2em;
   }
 }
@@ -390,13 +390,13 @@ $games-box-number: 6;
       padding-left: calc(#{$border-width-main} * 6);
       padding-right: calc(#{$border-width-main} * 6);
 
-      h1 {
+      h2 {
         text-transform: none;
         text-align: right;
       }
     }
 
-    h1 {
+    h3 {
       text-transform: uppercase;
       text-align: center;
     }
@@ -430,7 +430,7 @@ $games-box-number: 6;
       .info {
         grid-column-end: span calc(#{$games-box-number} - 1);
 
-        h1 {
+        h2 {
           text-align: center;
         }
 
@@ -450,7 +450,7 @@ $games-box-number: 6;
       .info {
         grid-column-end: span calc(#{$games-box-number} * 2);
 
-        h1 {
+        h2 {
           text-align: center;
         }
 
@@ -572,7 +572,7 @@ $roster-bg-monkas:      "../images/iff-stevatero.jpg";
       margin-bottom: 12px;
     }
 
-    h1 {
+    h2 {
       margin-bottom: 0px;
     }
 
@@ -679,6 +679,7 @@ $roster-bg-monkas:      "../images/iff-stevatero.jpg";
 
     #discord {
       @extend %container-dark;
+      display: block;
       font-size: 150%;
       overflow-wrap: break-word;
       border: $border-width-main solid $color-light-secondary;
@@ -706,7 +707,7 @@ $roster-bg-monkas:      "../images/iff-stevatero.jpg";
       i {
         font-size: 200%;
       }
-  
+
       p {
         font-size: 100%;
         margin-top: $border-width-main;
@@ -774,7 +775,7 @@ $history-marker-width: 30px;
     padding-bottom: calc(#{$border-width-main} * 9 + 30px);
     border-bottom: $border-width-main solid $color-light-secondary;
 
-    h1 {
+    h2 {
       margin-top: 0px;
       margin-bottom: calc(#{$border-width-main} * 3);
     }
@@ -846,7 +847,7 @@ $history-marker-width: 30px;
           text-align: left;
         }
 
-        h1 {
+        h3 {
           margin-top: 0px;
         }
       }
@@ -948,7 +949,7 @@ $events-width: 75%;
     padding-top: calc(#{$border-width-main} * 9);
     padding-bottom: calc(#{$border-width-main} * 9);
 
-    h1 {
+    h2 {
       margin-top: 0px;
       margin-bottom: calc(#{$border-width-main} * 3);
     }
@@ -1216,18 +1217,18 @@ $events-width: 75%;
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url(../images/bg-bepis.jpg) repeat;
   margin-bottom: 30px;
 
-  h1 {
+  h2 {
     margin-left: 20px;
     margin-right: 20px;
   }
 
-  h1:first-child {
+  h2:first-child {
     padding-top: 40px;
     padding-bottom: 0px;
     margin-bottom: 0px;
   }
 
-  h1:last-child {
+  h2:last-child {
     margin-top: 0px;
     padding-top: 0px;
     padding-bottom: 40px;
@@ -1246,7 +1247,7 @@ $events-width: 75%;
   .bepis {
     font-size: 65%;
 
-    h1:first-child {
+    h2:first-child {
       padding-bottom: 2px;
     }
 

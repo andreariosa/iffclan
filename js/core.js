@@ -205,7 +205,7 @@ function core() {
 
       // Update the call-to-action text with the remaining time
       document.getElementById("call-to-action").innerHTML =
-        "<h1>Next event in " +
+        "<h2>Next event in " +
         days +
         "d " +
         hours +
@@ -214,7 +214,7 @@ function core() {
         "m " +
         seconds +
         "s " +
-        "</h1>";
+        "</h2>";
 
       // If the countdown is over
       if (distance < 0) {
@@ -265,7 +265,8 @@ function core() {
   discord.onmouseout = function () {
     discord.innerHTML = discordText;
   };
-  discord.onclick = function () {
+  discord.onclick = function (event) {
+    event.preventDefault();
     var windowObjectReference;
     var windowFeatures =
       "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes";
